@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandscapeGenerator", "LandscapeGenerator\LandscapeGenerator.csproj", "{622F05E7-82CE-4AE2-9C19-B8145E16C810}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{622F05E7-82CE-4AE2-9C19-B8145E16C810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{622F05E7-82CE-4AE2-9C19-B8145E16C810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{622F05E7-82CE-4AE2-9C19-B8145E16C810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{622F05E7-82CE-4AE2-9C19-B8145E16C810}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86D6648E-3399-4A34-B153-4A533168645B}
+	EndGlobalSection
+EndGlobal
