@@ -8,15 +8,24 @@ namespace LandscapeGenerator
 {
     internal class Cell
     {
+
         public int X { get; private set; }
         public int Y { get; private set; }
-        public Color color { get; private set; }
-        public Cell(int x, int y)
+        public int Height { get; set; }
+        public Color Color { get; private set; }
+        public Cell(int x, int y, int h = 0)
         {
             X = x;
             Y = y;
+            Height = h;
             Random rand = new Random();
-            color = Color.FromArgb(255, rand.Next(1, 255), rand.Next(1, 255), rand.Next(1, 255));
+            Color = Color.FromArgb(255, rand.Next(1, 255), rand.Next(1, 255), rand.Next(1, 255));
+        }
+
+        public void updateColor()
+        {
+            double step = 255 / 10;
+            Color = Color.FromArgb(255, 0, (int)(Height * step), 0);
         }
     }
 }

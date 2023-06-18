@@ -30,7 +30,8 @@ namespace LandscapeGenerator
                 for (int j = 0; j < cellsAmount - 1; j++)
                 {
                     Cell currentCell = map.Field[i, j];
-                    graphics.FillRectangle(new SolidBrush(currentCell.color), currentCell.X, currentCell.Y, resolution, resolution);
+                    currentCell.updateColor();
+                    graphics.FillRectangle(new SolidBrush(currentCell.Color), currentCell.X, currentCell.Y, resolution, resolution);
                     //consoleBox.Text = resolution.ToString();
                     //consoleBox.Text += currentCell.X.ToString() + " " + currentCell.Y.ToString() + "   ";
                 }
@@ -49,6 +50,8 @@ namespace LandscapeGenerator
                     map.Field[i, j] = new Cell(i * resolution, j * resolution);
                 }
             }
+            MapGenerator generator = new DiamondSquareGenerator();
+            map.Field = generator.generateHeightMap(map.Field);
         }
 
 
