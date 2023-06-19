@@ -21,6 +21,7 @@ namespace LandscapeGenerator
             Width = width;
             Height = height;
             Field = new Cell[Width, Height];
+            MapUpdater = new MapUpdater(this);
 
             for (int x = 0; x < Height; x++)
             {

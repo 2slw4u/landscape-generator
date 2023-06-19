@@ -55,6 +55,7 @@ namespace LandscapeGenerator
             CellTypes.TypesContainer.initialize();
             InitilazeMap();
             ColorMap();
+            globalTimer.Enabled = true;
         }
 
         private void resolutionContainer_ValueChanged(object sender, EventArgs e)

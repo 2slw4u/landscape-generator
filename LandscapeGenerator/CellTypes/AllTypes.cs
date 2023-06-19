@@ -8,11 +8,11 @@ namespace LandscapeGenerator.CellTypes
 {
     public enum AllTypes
     {
-        SNOW,
-        FOREST,
-        GRASS,
-        SAND,
         WATER,
+        GRASS,
+        SNOW,
+        SAND,
+        FOREST,
         STONE
     }
 }

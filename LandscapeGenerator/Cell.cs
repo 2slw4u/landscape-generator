@@ -27,11 +27,6 @@ namespace LandscapeGenerator
             Type = TypesContainer.TypeList[0];
         }
         
-        public void updateColorGreen()
-        {
-            double step = 255 / 10;
-            Color = Color.FromArgb(255, 0, (int)(Height * step), 0);
-        }
 
         public void updateColor()
         {
