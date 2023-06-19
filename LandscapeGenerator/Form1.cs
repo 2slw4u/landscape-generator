@@ -101,6 +101,7 @@ namespace LandscapeGenerator
             graphics = Graphics.FromImage(landscapeBox.Image);
             ColorMap();
             globalTimer.Enabled = true;
+            startStopTimer.Enabled = true;
         }
 
         private void resolutionContainer_ValueChanged(object sender, EventArgs e)
@@ -110,6 +111,7 @@ namespace LandscapeGenerator
             landscapeBox.Image = new Bitmap(width * resolution, height * resolution);
             graphics = Graphics.FromImage(landscapeBox.Image);
             globalTimer.Enabled = false;
+            startStopTimer.Enabled = false;
             //InitilazeMap();
             //ColorMap();
         }
@@ -137,24 +139,18 @@ namespace LandscapeGenerator
             consoleBox.Text += text;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void startStopTimer_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-
+            if (globalTimer.Enabled == true)
+            {
+                startStopTimer.Text = "Дальше";
+                globalTimer.Enabled = false;
+            }
+            else
+            {
+                startStopTimer.Text = "Стоп";
+                globalTimer.Enabled = true;
+            }
         }
     }
 }
