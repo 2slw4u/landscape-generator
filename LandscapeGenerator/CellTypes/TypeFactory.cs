@@ -12,6 +12,8 @@ namespace LandscapeGenerator.CellTypes
         {
             switch(type)
             {
+                case AllTypes.LAVA:
+                    return new Lava();
                 case AllTypes.FOREST:
                     return new Forest();
                 case AllTypes.WATER:

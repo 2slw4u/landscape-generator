@@ -17,8 +17,8 @@ namespace LandscapeGenerator.Events
                     return new Draught();
                 case AllEvents.EARTHQUAKE:
                     return new Earthquake();
-                case AllEvents.TORNADO:
-                    return new Tornado();
+                case AllEvents.VOLCANO:
+                    return new Volcano();
                 default:
                     return new Earthquake();
 

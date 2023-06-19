@@ -10,7 +10,7 @@ namespace LandscapeGenerator.Events
     {
         DRAUGHT,
         EARTHQUAKE,
-        TORNADO
+        VOLCANO
     }
 
 }

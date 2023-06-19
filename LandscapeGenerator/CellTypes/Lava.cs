@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace LandscapeGenerator.CellTypes
 {
-    internal class Water : Type
+    internal class Lava : Type
     {
         private static readonly Dictionary<int, Color> colors = new Dictionary<int, Color>()
         {
-            {10, Color.FromArgb(205, 217, 239)},
-            {9, Color.FromArgb(188, 204, 234)},
-            {8, Color.FromArgb(173, 193, 229)},
-            {7, Color.FromArgb(159, 183, 225)},
-            {6, Color.FromArgb(144, 171, 220)},
-            {5, Color.FromArgb(130, 161, 216)},
-            {4, Color.FromArgb(106, 142, 208)},
-            {3, Color.FromArgb(86, 127, 202)},
-            {2, Color.FromArgb(60, 106, 190)},
-            {1, Color.FromArgb(50, 89, 158)},
-            {0, Color.FromArgb(42, 75, 134)}
+            {10, Color.FromArgb(255, 0, 0)},
+            {9, Color.FromArgb(255, 0, 0)},
+            {8, Color.FromArgb(255, 0, 0)},
+            {7, Color.FromArgb(255, 0, 0)},
+            {6, Color.FromArgb(255, 0, 0)},
+            {5, Color.FromArgb(255, 0, 0)},
+            {4, Color.FromArgb(225, 0, 0)},
+            {3, Color.FromArgb(195, 0, 0)},
+            {2, Color.FromArgb(165, 0, 0)},
+            {1, Color.FromArgb(135, 0, 0)},
+            {0, Color.FromArgb(105, 0, 0)}
 
 
         };
@@ -31,21 +31,25 @@ namespace LandscapeGenerator.CellTypes
 
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
-            if (affectedCell.PrevType is Water)
+            if (affectedCell.PrevType is Lava)
             {
-                bool lavaClose = false;
-                foreach (var cell in neighbours)
+                bool waterClose = false;
+                foreach(var cell in neighbours)
                 {
-                    if (cell.PrevType is Lava || cell.Type is Lava)
+                    if (cell.PrevType is Water || cell.Type is Water)
                     {
-                        lavaClose = true;
+                        waterClose = true;
                         break;
                     }
+                    if (cell.PrevType is Forest || cell.Type is Forest)
+                    {
+                        cell.Type = TypesContainer.TypeDict[AllTypes.STONE];
+                    }
                 }
-                if (lavaClose)
+                if (waterClose)
                 {
                     affectedCell.Type = TypesContainer.TypeDict[AllTypes.STONE];
-                    foreach (var cell in neighbours)
+                    foreach(var cell in neighbours)
                     {
                         cell.Type = TypesContainer.TypeDict[AllTypes.STONE];
                     }
@@ -56,13 +60,12 @@ namespace LandscapeGenerator.CellTypes
             }
             for (int i = 0; i < neighbours.Count; i++)
             {
-                if (neighbours[i].PrevType is Water && neighbours[i].Height >= affectedCell.Height)
+                if (neighbours[i].PrevType is Lava && neighbours[i].Height >= affectedCell.Height)
                 {
                     return true;
                 }
             }
             return false;
         }
-
     }
 }

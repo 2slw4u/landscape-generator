@@ -8,6 +8,7 @@ namespace LandscapeGenerator.CellTypes
 {
     public enum AllTypes
     {
+        LAVA,
         WATER,
         FOREST,
         GRASS,
