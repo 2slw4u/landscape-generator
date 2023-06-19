@@ -1,4 +1,6 @@
-﻿using System;
+
+using LandscapeGenerator.CellTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,8 @@ namespace LandscapeGenerator
         public int Y { get; private set; }
         public int Height { get; set; }
         public Color Color { get; private set; }
+        public CellTypes.Type type { get; private set; }
+        public LandscapeMap landscapeMap { get; private set; }
         public Cell(int x, int y, int h = 0)
         {
             X = x;
@@ -27,5 +31,6 @@ namespace LandscapeGenerator
             double step = 255 / 10;
             Color = Color.FromArgb(255, 0, (int)(Height * step), 0);
         }
+
     }
 }

@@ -29,5 +29,22 @@ namespace LandscapeGenerator
                 }
             }
         }
+        public List<Cell> getNeighbours(Cell cell)
+        {
+            List<Cell> result = new List<Cell>();
+            int x = cell.X;
+            int y = cell.Y;
+            for (int xAdditive = -1; xAdditive <= 1; ++xAdditive)
+            {
+                for (int yAdditive = -1; yAdditive <= 1; ++yAdditive)
+                {
+                    if (x + xAdditive >= 0 && y + yAdditive >= 0 && x + xAdditive < Width && y + yAdditive < Height && !(xAdditive == 0 && yAdditive == 0))
+                    {
+                        result.Add(this.Field[x+xAdditive, y+yAdditive]);
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
