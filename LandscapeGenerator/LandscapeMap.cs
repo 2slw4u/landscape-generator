@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,30 @@ namespace LandscapeGenerator
                 }
             }
             return result;
+        }
+
+        public void colorMap(Graphics graphics)
+        {
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Height; j++)
+                {
+                    Cell currentCell = Field[i, j];
+                    currentCell.updateColor();
+                    graphics.FillRectangle(new SolidBrush(currentCell.Color), currentCell.X, currentCell.Y, Simulation.resolution, Simulation.resolution);
+                }
+            }
+        }
+
+        public void updatePrevTypes()
+        {
+            for (int i = 0; i < Width; i++)
+            {
+                for (int j = 0; j < Height; j++)
+                {
+                    Field[i, j].PrevType = Field[i, j].Type;
+                }
+            }
         }
     }
 }

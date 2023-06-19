@@ -19,6 +19,7 @@ namespace LandscapeGenerator.Events
                 for (int j = Math.Max(0, positionY - size); j < Math.Min(maxSize, positionY + size); j++)
                 {
                     Field[i, j].Type = TypesContainer.TypeDict[AllTypes.STONE];
+                    Field[i, j].PrevType = TypesContainer.TypeDict[AllTypes.STONE];
                 }
             }
         }
