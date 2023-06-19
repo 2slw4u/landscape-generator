@@ -12,7 +12,7 @@ namespace LandscapeGenerator.CellTypes
         {
             for (int i = 0; i < neighbours.Count; i++)
             {
-                if (neighbours[i].type is Water && neighbours[i].Height >= affectedCell.Height)
+                if (neighbours[i].Type is Water && neighbours[i].Height >= affectedCell.Height)
                 {
                     //здесь докинуть нормальный updateSourceHeight()
                     return true;
@@ -20,6 +20,15 @@ namespace LandscapeGenerator.CellTypes
             }
             return false;
         }
-        
+        private static readonly Dictionary<int, Color> colors = new Dictionary<int, Color>()
+        {
+            {4, Color.FromArgb(255, 120,184,80)},
+            {5, Color.FromArgb(255, 98,155,63)}
+        };
+        public override Color getColor(int height)
+        {
+            return colors[height];
+        }
+
     }
 }

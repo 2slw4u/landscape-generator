@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LandscapeGenerator.CellTypes
 {
-    internal class TypeFactory
+    internal static class TypeFactory
     {
         public static Type getType(AllTypes type)
         {

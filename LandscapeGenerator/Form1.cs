@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace LandscapeGenerator
@@ -18,7 +19,6 @@ namespace LandscapeGenerator
             landscapeBox.Width = width;
             landscapeBox.Height = height;
             landscapeBox.Image = new Bitmap(width, height);
-            map = new LandscapeMap(cellsAmount, cellsAmount, this);
             graphics = Graphics.FromImage(landscapeBox.Image);
         }
 
@@ -52,6 +52,7 @@ namespace LandscapeGenerator
 
         private void button1_Click(object sender, EventArgs e)
         {
+            CellTypes.TypesContainer.initialize();
             InitilazeMap();
             ColorMap();
         }

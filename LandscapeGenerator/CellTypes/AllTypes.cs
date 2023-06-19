@@ -11,8 +11,8 @@ namespace LandscapeGenerator.CellTypes
         SNOW,
         FOREST,
         GRASS,
-        STONE,
         SAND,
-        WATER
+        WATER,
+        STONE
     }
 }
