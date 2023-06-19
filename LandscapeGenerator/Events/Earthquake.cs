@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LandscapeGenerator.CellTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,20 @@ namespace LandscapeGenerator.Events
             {
                 for (int j= Math.Max(0,positionY-size); j< Math.Min(maxSize, positionY+size); j++)
                 {
-                    Field[i, j].Height += random.Next(-2, 3);
+                    int HeightChange = random.Next(-2, 3);
+                    if (Field[i, j].Height + HeightChange < 0)
+                    {
+                        Field[i, j].Height = 0;
+                    }
+                    else if (Field[i, j].Height + HeightChange > 10)
+                    {
+                        Field[i, j].Height = 10;
+                    }
+                    else
+                    {
+                        Field[i, j].Height += HeightChange;
+                    }
+                    Field[i, j].Type = TypesContainer.TypeDict[AllTypes.STONE];
                 }
             }
 

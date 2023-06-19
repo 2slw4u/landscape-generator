@@ -37,12 +37,13 @@ namespace LandscapeGenerator
 
                 }
             }
-            EventGenerator.GenerateEvent(Map.Height);
+            Event newEvent = EventGenerator.GenerateEvent(Map.Height);
+            newEvent.happen(Map.Field);
         }
         public MapUpdater(LandscapeMap Map)
         {
             this.Map = Map;
-            this.EventGenerator = new EventGenerator(0);
+            this.EventGenerator = new EventGenerator(0.9); 
         }
 
         
