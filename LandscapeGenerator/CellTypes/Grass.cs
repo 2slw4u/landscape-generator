@@ -10,8 +10,17 @@ namespace LandscapeGenerator.CellTypes
     {
         private static readonly Dictionary<int, Color> colors = new Dictionary<int, Color>()
         {
-            {4, Color.FromArgb(255, 120,184,80)},
-            {5, Color.FromArgb(255, 98,155,63)}
+            {10, Color.FromArgb(166,208,140)},
+            {9, Color.FromArgb(154,202,124)},
+            {8, Color.FromArgb(143,196,110)},
+            {7, Color.FromArgb(133,191,97)},
+            {6, Color.FromArgb(124,186,86)},
+            {5, Color.FromArgb(113,177,73)},
+            {4, Color.FromArgb(107,168,70)},
+            {3, Color.FromArgb(100,157,65)},
+            {2, Color.FromArgb(95,149,61)},
+            {1, Color.FromArgb(88,139,57)},
+            {0, Color.FromArgb(81,128,52)}
         };
         public override Color getColor(int height)
         {
