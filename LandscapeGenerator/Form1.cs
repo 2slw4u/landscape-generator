@@ -1,3 +1,4 @@
+using LandscapeGenerator.CellTypes;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -35,7 +36,7 @@ namespace LandscapeGenerator
             }
             landscapeBox.Refresh();
         }
-        private void InitilazeMap()
+        private void InitializeMap()
         {
             map = new LandscapeMap(cellsAmount, cellsAmount, this);
             for (int i = 0; i < cellsAmount; ++i)
@@ -47,13 +48,55 @@ namespace LandscapeGenerator
             }
             MapGenerator generator = new DiamondSquareGenerator();
             map.Field = generator.generateHeightMap(map.Field);
+            InitializeForest();
+            InitializeWater();
+            updatePrevTypes();
+        }
+
+        private void InitializeForest()
+        {
+            const double rate = 0.2;
+            Random r = new Random();
+            for (int i = 0; i < cellsAmount; ++i)
+            {
+                for (int j = 0; j < cellsAmount; ++j)
+                {
+
+                    double roll = r.NextDouble();
+                    if (rate < roll)
+                    {
+                        map.Field[i, j].Type = TypesContainer.TypeDict[AllTypes.FOREST];
+                    }
+                }
+            }
+        }
+
+        private void InitializeWater()
+        {
+            //сделать по типам инициализацию
+            const int sourceAmmount = 2;
+            Random r = new Random();
+            for (int i = 0; i < sourceAmmount; i++)
+            {
+                bool choiseMade = false;
+                while (!choiseMade)
+                {
+                    int choiseX = (int)(map.Width * r.NextDouble());
+                    int choiseY = (int)(map.Height * r.NextDouble());
+                    if (map.Field[choiseX, choiseY].Height < 5)
+                    {
+                        map.Field[choiseX, choiseY].Type = TypesContainer.TypeDict[AllTypes.WATER];
+                        choiseMade = true;
+                    }
+                }
+            }
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CellTypes.TypesContainer.initialize();
-            InitilazeMap();
+            TypesContainer.initialize();
+            InitializeMap();
             landscapeBox.Image = new Bitmap(width, height);
             graphics = Graphics.FromImage(landscapeBox.Image);
             ColorMap();
@@ -75,6 +118,18 @@ namespace LandscapeGenerator
         {
             map.MapUpdater.updateNextTick();
             ColorMap();
+            updatePrevTypes();
+        }
+
+        private void updatePrevTypes()
+        {
+            for (int i = 0; i < cellsAmount; i++)
+            {
+                for (int j = 0; j < cellsAmount; j++)
+                {
+                    map.Field[i, j].PrevType = map.Field[i, j].Type;
+                }
+            }
         }
 
         public void changeText(string text)

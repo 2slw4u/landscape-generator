@@ -30,14 +30,22 @@ namespace LandscapeGenerator.CellTypes
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
             int forestCount = 0;
+            if (affectedCell.Height >= 9)
+            {
+                return false;
+            }
+            if (affectedCell.Type is Sand)
+            {
+                return false;
+            }
             foreach(Cell neighbor in neighbours)
             {
-                if(neighbor.Type is Forest)
+                if(neighbor.PrevType is Forest && (Math.Abs(affectedCell.Height - neighbor.Height) < 5))
                 {
                     forestCount++;
                 }
             }
-            if ((forestCount == 2 || forestCount == 3) && affectedCell.Type is Forest)
+            if ((forestCount == 1 || forestCount == 2 || forestCount == 3) && affectedCell.PrevType is Forest)
             {
                 return true;
             }
