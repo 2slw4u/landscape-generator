@@ -25,8 +25,8 @@ namespace LandscapeGenerator
                     {
                         if (currentType.determineIfSuitable(currentCell, neighbours))
                         {
-                            //Debug.WriteLine(currentType);
                             currentCell.Type = currentType;
+                            //Map.Simulation.changeText(currentCell.X.ToString() + " " + currentCell.Y.ToString() + "   ");
                             break;
                         }
  

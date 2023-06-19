@@ -29,7 +29,7 @@ namespace LandscapeGenerator.CellTypes
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
             Random random = new Random();
-            if (random.Next(0, 9) + affectedCell.Height >= 10)
+            if (random.Next(0, 900) + affectedCell.Height*100 >= 1600)
             {
                 return true;
             }

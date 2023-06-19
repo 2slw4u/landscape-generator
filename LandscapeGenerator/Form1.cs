@@ -8,7 +8,7 @@ namespace LandscapeGenerator
         private Graphics graphics;
         private int width = 800;
         private int height = 800;
-        private int resolution = 1;
+        public int resolution = 1;
         private int cellsAmount = 1;
         private LandscapeMap map;
         public Form1()
@@ -24,9 +24,9 @@ namespace LandscapeGenerator
 
         private void ColorMap()
         {
-            for (int i = 0; i < cellsAmount - 1; i++)
+            for (int i = 0; i < cellsAmount; i++)
             {
-                for (int j = 0; j < cellsAmount - 1; j++)
+                for (int j = 0; j < cellsAmount; j++)
                 {
                     Cell currentCell = map.Field[i, j];
                     currentCell.updateColor();
@@ -54,6 +54,8 @@ namespace LandscapeGenerator
         {
             CellTypes.TypesContainer.initialize();
             InitilazeMap();
+            landscapeBox.Image = new Bitmap(width, height);
+            graphics = Graphics.FromImage(landscapeBox.Image);
             ColorMap();
             globalTimer.Enabled = true;
         }
@@ -64,14 +66,20 @@ namespace LandscapeGenerator
             resolution = width / cellsAmount;
             landscapeBox.Image = new Bitmap(width * resolution, height * resolution);
             graphics = Graphics.FromImage(landscapeBox.Image);
-            InitilazeMap();
-            ColorMap();
+            globalTimer.Enabled = false;
+            //InitilazeMap();
+            //ColorMap();
         }
 
         private void globalTimer_Tick(object sender, EventArgs e)
         {
             map.MapUpdater.updateNextTick();
             ColorMap();
+        }
+
+        public void changeText(string text)
+        {
+            consoleBox.Text += text;
         }
     }
 }

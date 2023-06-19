@@ -31,9 +31,13 @@ namespace LandscapeGenerator.CellTypes
 
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
+            if (affectedCell.Type is Water)
+            {
+                return false;
+            }
             for (int i = 0; i < neighbours.Count; i++)
             {
-                if (neighbours[i].Type is Water && neighbours[i].Height >= affectedCell.Height)
+                if (neighbours[i].Type is Water && neighbours[i].Height > affectedCell.Height)
                 {
                     //здесь докинуть нормальный updateSourceHeight()
                     return true;
