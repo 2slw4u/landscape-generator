@@ -11,9 +11,9 @@ namespace LandscapeGenerator.CellTypes
         private static readonly Dictionary<int, Color> colors = new Dictionary<int, Color>()
         {
             {10, Color.FromArgb(255, 255, 255)},
-            {9, Color.FromArgb(249, 249, 249)},
-            {8, Color.FromArgb(238, 238, 238)},
-            {7, Color.FromArgb(228, 228, 228)},
+            {9, Color.FromArgb(238, 238, 238)},
+            {8, Color.FromArgb(217, 217, 217)},
+            {7, Color.FromArgb(197, 197, 197)},
             {6, Color.FromArgb(217, 217, 217)},
             {5, Color.FromArgb(209, 209, 209)},
             {4, Color.FromArgb(197, 197, 197)},
@@ -28,8 +28,12 @@ namespace LandscapeGenerator.CellTypes
         }
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
+            if (affectedCell.Type is CellTypes.Snow)
+            {
+                return true;
+            }
             Random random = new Random();
-            if (random.Next(0, 900) + affectedCell.Height*100 >= 1600)
+            if (random.NextDouble() * (affectedCell.Height - 7) >= 1)
             {
                 return true;
             }

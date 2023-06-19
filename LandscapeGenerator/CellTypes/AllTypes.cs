@@ -9,10 +9,10 @@ namespace LandscapeGenerator.CellTypes
     public enum AllTypes
     {
         WATER,
-        GRASS,
-        SNOW,
-        SAND,
         FOREST,
+        GRASS,
+        SAND,
+        SNOW,
         STONE
     }
 }

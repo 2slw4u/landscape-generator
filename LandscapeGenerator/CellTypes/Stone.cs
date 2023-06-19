@@ -29,7 +29,7 @@ namespace LandscapeGenerator.CellTypes
         }
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
-            return false;
+            return true;
         }
     }
 }

@@ -8,13 +8,13 @@ namespace LandscapeGenerator.CellTypes
 {
     internal static class TypesContainer
     {
-        public static List<CellTypes.Type> TypeList;
+        public static Dictionary<CellTypes.AllTypes,CellTypes.Type> TypeDict;
         public static void initialize()
         {
-            TypeList = new List<CellTypes.Type>();
+            TypeDict = new Dictionary<AllTypes, CellTypes.Type>();
             foreach (AllTypes typeName in Enum.GetValues(typeof(AllTypes)))
             {
-                TypeList.Add(TypeFactory.getType(typeName));
+                TypeDict.Add(typeName, TypeFactory.getType(typeName));
             }
         }
     }

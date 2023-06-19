@@ -33,13 +33,12 @@ namespace LandscapeGenerator.CellTypes
         {
             if (affectedCell.Type is Water)
             {
-                return false;
+                return true;
             }
             for (int i = 0; i < neighbours.Count; i++)
             {
-                if (neighbours[i].Type is Water && neighbours[i].Height > affectedCell.Height)
+                if (neighbours[i].Type is Water && neighbours[i].Height >= affectedCell.Height)
                 {
-                    //здесь докинуть нормальный updateSourceHeight()
                     return true;
                 }
             }

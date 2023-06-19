@@ -28,7 +28,7 @@ namespace LandscapeGenerator.CellTypes
         }
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
-            if (affectedCell.Type is Grass)
+            if (affectedCell.Type is Stone)
             {
                 for (int i = 0; i < neighbours.Count; i++)
                 {

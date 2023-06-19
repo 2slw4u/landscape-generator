@@ -11,6 +11,7 @@ namespace LandscapeGenerator
     internal class MapUpdater
     {
         private LandscapeMap Map;
+        private LandscapeMap prevMap;
 
         public void updateNextTick()
         {
@@ -21,11 +22,11 @@ namespace LandscapeGenerator
                 {
                     Cell currentCell = Map.Field[i, j];
                     List<Cell> neighbours = Map.getNeighbours(currentCell);
-                    foreach(CellTypes.Type currentType in TypesContainer.TypeList)
+                    foreach(var currentType in TypesContainer.TypeDict)
                     {
-                        if (currentType.determineIfSuitable(currentCell, neighbours))
+                        if (currentType.Value.determineIfSuitable(currentCell, neighbours))
                         {
-                            currentCell.Type = currentType;
+                            currentCell.Type = currentType.Value;
                             //Map.Simulation.changeText(currentCell.X.ToString() + " " + currentCell.Y.ToString() + "   ");
                             break;
                         }
@@ -37,6 +38,7 @@ namespace LandscapeGenerator
         public MapUpdater(LandscapeMap Map)
         {
             this.Map = Map;
+            this.prevMap = Map;
         }
     }
 }
