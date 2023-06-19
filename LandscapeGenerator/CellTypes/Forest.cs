@@ -40,12 +40,12 @@ namespace LandscapeGenerator.CellTypes
             }
             foreach(Cell neighbor in neighbours)
             {
-                if(neighbor.Type is Forest && (Math.Abs(affectedCell.Height - neighbor.Height) < 5))
+                if(neighbor.PrevType is Forest && (Math.Abs(affectedCell.Height - neighbor.Height) < 5))
                 {
                     forestCount++;
                 }
             }
-            if ((forestCount == 2 || forestCount == 3) && affectedCell.Type is Forest)
+            if ((forestCount == 1 || forestCount == 2 || forestCount == 3) && affectedCell.PrevType is Forest)
             {
                 return true;
             }

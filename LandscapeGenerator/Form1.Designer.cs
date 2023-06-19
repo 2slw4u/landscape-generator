@@ -77,7 +77,7 @@
             // 
             // globalTimer
             // 
-            globalTimer.Interval = 1000;
+            globalTimer.Interval = 500;
             globalTimer.Tick += globalTimer_Tick;
             // 
             // Form1

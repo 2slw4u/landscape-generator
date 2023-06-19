@@ -50,11 +50,12 @@ namespace LandscapeGenerator
             map.Field = generator.generateHeightMap(map.Field);
             InitializeForest();
             InitializeWater();
+            updatePrevTypes();
         }
 
         private void InitializeForest()
         {
-            const double rate = 0.1;
+            const double rate = 0.2;
             Random r = new Random();
             for (int i = 0; i < cellsAmount; ++i)
             {
@@ -82,7 +83,7 @@ namespace LandscapeGenerator
                 {
                     int choiseX = (int)(map.Width * r.NextDouble());
                     int choiseY = (int)(map.Height * r.NextDouble());
-                    if (map.Field[choiseX, choiseY].Height < 6)
+                    if (map.Field[choiseX, choiseY].Height < 5)
                     {
                         map.Field[choiseX, choiseY].Type = TypesContainer.TypeDict[AllTypes.WATER];
                         choiseMade = true;
@@ -94,7 +95,7 @@ namespace LandscapeGenerator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CellTypes.TypesContainer.initialize();
+            TypesContainer.initialize();
             InitializeMap();
             landscapeBox.Image = new Bitmap(width, height);
             graphics = Graphics.FromImage(landscapeBox.Image);
@@ -117,6 +118,18 @@ namespace LandscapeGenerator
         {
             map.MapUpdater.updateNextTick();
             ColorMap();
+            updatePrevTypes();
+        }
+
+        private void updatePrevTypes()
+        {
+            for (int i = 0; i < cellsAmount; i++)
+            {
+                for (int j = 0; j < cellsAmount; j++)
+                {
+                    map.Field[i, j].PrevType = map.Field[i, j].Type;
+                }
+            }
         }
 
         public void changeText(string text)
