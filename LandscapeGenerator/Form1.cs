@@ -1,5 +1,6 @@
 using LandscapeGenerator.CellTypes;
 using LandscapeGenerator.Events;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -169,9 +170,13 @@ namespace LandscapeGenerator
             }
             else if (typeOfAddedObject == "Event")
             {
-
+                Event newEvent = EventsContainer.EventsDict[Enum.Parse<AllEvents>(addedObject, true)];
+                int neededIndex = EventsContainer.EventsDict.Values.ToList().IndexOf(newEvent);
+                newEvent = map.MapUpdater.EventGenerator.GenerateEvent(map.Height, CellXCoordinate, CellYCoordinate, neededIndex, 1);
+                newEvent.happen(map.Field);
+                // consoleBox.Text += neededIndex.ToString();
             }
-            consoleBox.Text += CellXCoordinate.ToString() + ";" + CellYCoordinate.ToString() + "        ";
+            //consoleBox.Text += CellXCoordinate.ToString() + ";" + CellYCoordinate.ToString() + "        ";
             ColorMap();
         }
 
@@ -209,6 +214,24 @@ namespace LandscapeGenerator
         {
             typeOfAddedObject = "Cell";
             addedObject = "Stone";
+        }
+
+        private void ApplyDraughtButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Event";
+            addedObject = "Draught";
+        }
+
+        private void ApplyEarthquakeButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Event";
+            addedObject = "Earthquake";
+        }
+
+        private void ApplyVolcanoButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Event";
+            addedObject = "Volcano";
         }
     }
 }
