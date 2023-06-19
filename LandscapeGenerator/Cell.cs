@@ -15,7 +15,7 @@ namespace LandscapeGenerator
         public int Y { get; private set; }
         public int Height { get; set; }
         public Color Color { get; private set; }
-        public CellTypes.Type type { get; private set; }
+        public CellTypes.Type type { get; set; }
         public LandscapeMap landscapeMap { get; private set; }
         public Cell(int x, int y, int h = 0)
         {
@@ -25,12 +25,18 @@ namespace LandscapeGenerator
             Random rand = new Random();
             Color = Color.FromArgb(255, rand.Next(1, 255), rand.Next(1, 255), rand.Next(1, 255));
         }
-
-        public void updateColor()
+        
+        public void updateColorGreen()
         {
             double step = 255 / 10;
             Color = Color.FromArgb(255, 0, (int)(Height * step), 0);
         }
+
+        public void updateColor()
+        {
+            Color = type.getColor(Height);
+        }
+
 
     }
 }

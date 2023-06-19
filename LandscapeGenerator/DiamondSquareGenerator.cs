@@ -10,8 +10,6 @@ namespace LandscapeGenerator
 {
     internal class DiamondSquareGenerator : MapGenerator
     {
-        private double seed { get; set; }
-        private double roughness { get; set; }
         public Cell[,] generateHeightMap(Cell[,] field)
         {
             const double SEED = 0.35;
