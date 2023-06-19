@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             landscapeBox = new PictureBox();
             button1 = new Button();
             resolutionContainer = new NumericUpDown();
             consoleBox = new TextBox();
+            globalTimer = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)landscapeBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)resolutionContainer).BeginInit();
             SuspendLayout();
@@ -73,6 +75,11 @@
             consoleBox.Size = new Size(284, 255);
             consoleBox.TabIndex = 3;
             // 
+            // globalTimer
+            // 
+            globalTimer.Interval = 1000;
+            globalTimer.Tick += globalTimer_Tick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -96,5 +103,6 @@
         private Button button1;
         private NumericUpDown resolutionContainer;
         private TextBox consoleBox;
+        private System.Windows.Forms.Timer globalTimer;
     }
 }

@@ -24,7 +24,6 @@ namespace LandscapeGenerator
 
         private void ColorMap()
         {
-
             for (int i = 0; i < cellsAmount - 1; i++)
             {
                 for (int j = 0; j < cellsAmount - 1; j++)
@@ -32,12 +31,8 @@ namespace LandscapeGenerator
                     Cell currentCell = map.Field[i, j];
                     currentCell.updateColor();
                     graphics.FillRectangle(new SolidBrush(currentCell.Color), currentCell.X, currentCell.Y, resolution, resolution);
-                    //consoleBox.Text = resolution.ToString();
-                    //consoleBox.Text += currentCell.X.ToString() + " " + currentCell.Y.ToString() + "   ";
                 }
             }
-
-            //graphics.FillRectangle(new SolidBrush(currentColor), rand.Next(0, 50), rand.Next(0, 50), rand.Next(0, 50), rand.Next(0, 50));
             landscapeBox.Refresh();
         }
         private void InitilazeMap()
@@ -68,6 +63,12 @@ namespace LandscapeGenerator
             landscapeBox.Image = new Bitmap(width * resolution, height * resolution);
             graphics = Graphics.FromImage(landscapeBox.Image);
             InitilazeMap();
+            ColorMap();
+        }
+
+        private void globalTimer_Tick(object sender, EventArgs e)
+        {
+            map.MapUpdater.updateNextTick();
             ColorMap();
         }
     }

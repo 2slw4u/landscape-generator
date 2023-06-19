@@ -19,9 +19,6 @@ namespace LandscapeGenerator.CellTypes
             }
             return false;
         }
-        public override void update(Type newType)
-        {
-
-        }
+        
     }
 }

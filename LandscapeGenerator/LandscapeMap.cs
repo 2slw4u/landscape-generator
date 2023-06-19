@@ -14,6 +14,7 @@ namespace LandscapeGenerator
         public Cell[,] Field { get; set; }
         public Form1 Simulation { get; set; }
         public int Res { get; set; }
+        public MapUpdater MapUpdater { get; private set; }
         public LandscapeMap(int width, int height, Form1 form)
         {
             Simulation = form;
