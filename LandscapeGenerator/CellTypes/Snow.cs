@@ -28,7 +28,7 @@ namespace LandscapeGenerator.CellTypes
         }
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
-            if (affectedCell.Type is CellTypes.Snow)
+            if (affectedCell.PrevType is CellTypes.Snow)
             {
                 return true;
             }

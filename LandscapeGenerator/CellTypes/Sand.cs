@@ -29,13 +29,13 @@ namespace LandscapeGenerator.CellTypes
         }
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
-            if (affectedCell.Type is Water || affectedCell.Type is Snow)
+            if (affectedCell.PrevType is Water || affectedCell.PrevType is Snow)
             {
                 return false;
             }
             for (int i = 0; i < neighbours.Count; i++)
             {
-                if (neighbours[i].Type is Water)
+                if (neighbours[i].PrevType is Water)
                 {
                     return true;
                 }

@@ -11,7 +11,6 @@ namespace LandscapeGenerator
     internal class MapUpdater
     {
         private LandscapeMap Map;
-        private LandscapeMap prevMap;
 
         public void updateNextTick()
         {
@@ -38,7 +37,6 @@ namespace LandscapeGenerator
         public MapUpdater(LandscapeMap Map)
         {
             this.Map = Map;
-            this.prevMap = Map;
         }
     }
 }
