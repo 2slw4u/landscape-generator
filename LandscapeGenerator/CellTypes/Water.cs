@@ -63,6 +63,26 @@ namespace LandscapeGenerator.CellTypes
             }
             return false;
         }
+        public override void Initialize(Cell[,] Field)
+        {
+            const int sourceAmmount = 2;
+            Random r = new Random();
+            int size = Field.GetLength(0);
+            for (int i = 0; i < sourceAmmount; i++)
+            {
+                bool choiseMade = false;
+                while (!choiseMade)
+                {
+                    int choiseX = (int)(size * r.NextDouble());
+                    int choiseY = (int)(size * r.NextDouble());
+                    if (Field[choiseX, choiseY].Height < 5)
+                    {
+                        Field[choiseX, choiseY].Type = TypesContainer.TypeDict[AllTypes.WATER];
+                        choiseMade = true;
+                    }
+                }
+            }
+        }
 
     }
 }

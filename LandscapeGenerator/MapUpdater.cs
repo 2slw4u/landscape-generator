@@ -24,7 +24,7 @@ namespace LandscapeGenerator
                 {
                     Cell currentCell = Map.Field[i, j];
                     List<Cell> neighbours = Map.getNeighbours(currentCell);
-                    foreach(var currentType in TypesContainer.TypeDict)
+                    foreach(KeyValuePair<AllTypes,CellTypes.Type> currentType in TypesContainer.TypeDict)
                     {
                         if (currentType.Value.determineIfSuitable(currentCell, neighbours))
                         {

@@ -31,5 +31,9 @@ namespace LandscapeGenerator.CellTypes
         {
             return true;
         }
+        public override void Initialize(Cell[,] Field)
+        {
+
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LandscapeGenerator.CellTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace LandscapeGenerator.Initialize
             }
             MapGenerator generator = new DiamondSquareGenerator();
             map.Field = generator.generateHeightMap(map.Field);
+            List<CellTypes.Type> TypesList = TypesContainer.TypeDict.Values.ToList();
+            TypesList.Reverse();
+            foreach (CellTypes.Type currentType in TypesList)
+            {
+                currentType.Initialize(map.Field);
+            }
             return map;
         }
 

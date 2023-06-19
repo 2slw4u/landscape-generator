@@ -56,5 +56,23 @@ namespace LandscapeGenerator.CellTypes
 
             return false;
         }
+        public override void Initialize(Cell[,] Field)
+        {
+            const double rate = 0.2;
+            Random r = new Random();
+            int size = Field.GetLength(0);
+            for (int i = 0; i < size; ++i)
+            {
+                for (int j = 0; j < size; ++j)
+                {
+
+                    double roll = r.NextDouble();
+                    if (rate < roll)
+                    {
+                        Field[i, j].Type = TypesContainer.TypeDict[AllTypes.FOREST];
+                    }
+                }
+            }
+        }
     }
 }

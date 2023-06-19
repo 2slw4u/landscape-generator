@@ -47,40 +47,12 @@ namespace LandscapeGenerator
       
         public void InitializeForest()
         {
-            const double rate = 0.2;
-            Random r = new Random();
-            for (int i = 0; i < cellsAmount; ++i)
-            {
-                for (int j = 0; j < cellsAmount; ++j)
-                {
 
-                    double roll = r.NextDouble();
-                    if (rate < roll)
-                    {
-                        map.Field[i, j].Type = TypesContainer.TypeDict[AllTypes.FOREST];
-                    }
-                }
-            }
         }
 
         public void InitializeWater()
         {
-            const int sourceAmmount = 2;
-            Random r = new Random();
-            for (int i = 0; i < sourceAmmount; i++)
-            {
-                bool choiseMade = false;
-                while (!choiseMade)
-                {
-                    int choiseX = (int)(map.Width * r.NextDouble());
-                    int choiseY = (int)(map.Height * r.NextDouble());
-                    if (map.Field[choiseX, choiseY].Height < 5)
-                    {
-                        map.Field[choiseX, choiseY].Type = TypesContainer.TypeDict[AllTypes.WATER];
-                        choiseMade = true;
-                    }
-                }
-            }
+
         }
 
 

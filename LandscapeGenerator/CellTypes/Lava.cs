@@ -51,9 +51,10 @@ namespace LandscapeGenerator.CellTypes
                     affectedCell.Type = TypesContainer.TypeDict[AllTypes.STONE];
                     foreach(var cell in neighbours)
                     {
+                        cell.PrevType = TypesContainer.TypeDict[AllTypes.STONE];
                         cell.Type = TypesContainer.TypeDict[AllTypes.STONE];
                     }
-                    affectedCell.Height = Math.Min(affectedCell.Height + 1, 10);
+                    affectedCell.Height = Math.Min(affectedCell.Height + 2, 10);
                     return false;
                 }
                 return true;
@@ -66,6 +67,10 @@ namespace LandscapeGenerator.CellTypes
                 }
             }
             return false;
+        }
+        public override void Initialize(Cell[,] Field)
+        {
+
         }
     }
 }

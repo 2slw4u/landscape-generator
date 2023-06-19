@@ -11,5 +11,6 @@ namespace LandscapeGenerator.CellTypes
         public abstract bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours);
 
         public abstract Color getColor(int height);
+        public abstract void Initialize(Cell[,] Field);
     }
 }
