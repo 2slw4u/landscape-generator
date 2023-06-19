@@ -12,6 +12,8 @@ namespace LandscapeGenerator
         private int height = 800;
         public int resolution = 1;
         private int cellsAmount = 1;
+        private string addedObject = "Stone";
+        private string typeOfAddedObject = "Cell";
         private LandscapeMap map;
         public Form1()
         {
@@ -74,7 +76,6 @@ namespace LandscapeGenerator
 
         private void InitializeWater()
         {
-            //сделать по типам инициализацию
             const int sourceAmmount = 2;
             Random r = new Random();
             for (int i = 0; i < sourceAmmount; i++)
@@ -104,6 +105,7 @@ namespace LandscapeGenerator
             ColorMap();
             globalTimer.Enabled = true;
             startStopTimer.Enabled = true;
+            landscapeBox.Enabled = true;
         }
 
         private void resolutionContainer_ValueChanged(object sender, EventArgs e)
@@ -114,8 +116,8 @@ namespace LandscapeGenerator
             graphics = Graphics.FromImage(landscapeBox.Image);
             globalTimer.Enabled = false;
             startStopTimer.Enabled = false;
-            //InitilazeMap();
-            //ColorMap();
+            startStopTimer.Text = "—топ";
+            landscapeBox.Enabled = false;
         }
 
         private void globalTimer_Tick(object sender, EventArgs e)
@@ -156,9 +158,57 @@ namespace LandscapeGenerator
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void landscapeBox_Click(object sender, EventArgs e)
         {
-            
+            int CellXCoordinate = (int)Math.Floor((double)landscapeBox.PointToClient(Cursor.Position).X / resolution);
+            int CellYCoordinate = (int)Math.Floor((double)landscapeBox.PointToClient(Cursor.Position).Y / resolution);
+            if (typeOfAddedObject == "Cell")
+            {
+                map.Field[CellXCoordinate, CellYCoordinate].PrevType = TypesContainer.TypeDict[Enum.Parse<AllTypes>(addedObject, true)];
+                map.Field[CellXCoordinate, CellYCoordinate].Type = TypesContainer.TypeDict[Enum.Parse<AllTypes>(addedObject, true)];
+            }
+            else if (typeOfAddedObject == "Event")
+            {
+
+            }
+            consoleBox.Text += CellXCoordinate.ToString() + ";" + CellYCoordinate.ToString() + "        ";
+            ColorMap();
+        }
+
+        private void AddGrassButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Cell";
+            addedObject = "Grass";
+        }
+
+        private void AddForestButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Cell";
+            addedObject = "Forest";
+        }
+
+        private void AddWaterButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Cell";
+            addedObject = "Water";
+        }
+
+        private void AddSandButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Cell";
+            addedObject = "Sand";
+        }
+
+        private void AddSnowButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Cell";
+            addedObject = "Snow";
+        }
+
+        private void AddStoneButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Cell";
+            addedObject = "Stone";
         }
     }
 }

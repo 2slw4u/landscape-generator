@@ -38,7 +38,10 @@ namespace LandscapeGenerator
                 }
             }
             Event newEvent = EventGenerator.GenerateEvent(Map.Height);
-            newEvent.happen(Map.Field);
+            if (newEvent != null)
+            {
+                newEvent.happen(Map.Field);
+            }
         }
         public MapUpdater(LandscapeMap Map)
         {
