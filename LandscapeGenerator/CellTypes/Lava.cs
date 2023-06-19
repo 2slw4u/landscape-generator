@@ -31,8 +31,13 @@ namespace LandscapeGenerator.CellTypes
 
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
+            if (affectedCell.Height > 5)
+            {
+                return false;
+            }
             if (affectedCell.PrevType is Lava)
             {
+
                 bool waterClose = false;
                 foreach(var cell in neighbours)
                 {
