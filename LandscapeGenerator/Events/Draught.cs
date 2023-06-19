@@ -18,7 +18,7 @@ namespace LandscapeGenerator.Events
             {
                 for (int j = Math.Max(0, positionY - size); j < Math.Min(maxSize, positionY + size); j++)
                 {
-                    if (Field[i, j].Type is Water) Field[i, j].Type = TypesContainer.TypeDict[AllTypes.STONE];
+                    if (Field[i, j].Type is Water || Field[i, j].Type is Grass || Field[i, j].Type is Forest) Field[i, j].Type = TypesContainer.TypeDict[AllTypes.STONE];
                 }
             }
         }

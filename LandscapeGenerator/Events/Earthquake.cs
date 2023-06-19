@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LandscapeGenerator.CellTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,8 @@ namespace LandscapeGenerator.Events
             {
                 for (int j= Math.Max(0,positionY-size); j< Math.Min(maxSize, positionY+size); j++)
                 {
+                    if (Field[i, j].Type is Grass || Field[i, j].Type is Forest) Field[i, j].Type = TypesContainer.TypeDict[AllTypes.STONE];
+
                     Field[i, j].Height += random.Next(-2, 3);
                 }
             }
