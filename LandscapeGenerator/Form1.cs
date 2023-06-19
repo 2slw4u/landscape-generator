@@ -31,32 +31,7 @@ namespace LandscapeGenerator
             initialize = new Initialize.Initialize(this);
         }
 
-        private void ColorMap()
-        {
-            for (int i = 0; i < cellsAmount; i++)
-            {
-                for (int j = 0; j < cellsAmount; j++)
-                {
-                    Cell currentCell = map.Field[i, j];
-                    currentCell.updateColor();
-                    graphics.FillRectangle(new SolidBrush(currentCell.Color), currentCell.X, currentCell.Y, resolution, resolution);
-                }
-            }
-            landscapeBox.Refresh();
-        }
-      
-        public void InitializeForest()
-        {
-
-        }
-
-        public void InitializeWater()
-        {
-
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
             TypesContainer.initialize();
             EventsContainer.initialize();
@@ -64,13 +39,39 @@ namespace LandscapeGenerator
 
             InitializeForest();
             InitializeWater();
-            updatePrevTypes();
+
+            map.updatePrevTypes();
             landscapeBox.Image = new Bitmap(width, height);
             graphics = Graphics.FromImage(landscapeBox.Image);
-            ColorMap();
+            map.colorMap(graphics);
+            landscapeBox.Refresh();
             globalTimer.Enabled = true;
             startStopTimer.Enabled = true;
             landscapeBox.Enabled = true;
+        }
+
+        public void InitializeForest()
+        {
+
+        }
+            const double rate = 0.2;
+            Random r = new Random();
+            for (int i = 0; i < cellsAmount; ++i)
+            {
+                for (int j = 0; j < cellsAmount; ++j)
+                {
+                    double roll = r.NextDouble();
+                    if (rate < roll)
+                    {
+                        map.Field[i, j].Type = TypesContainer.TypeDict[AllTypes.FOREST];
+                    }
+                }
+            }
+        }
+
+        public void InitializeWater()
+        {
+
         }
 
         private void resolutionContainer_ValueChanged(object sender, EventArgs e)
@@ -88,25 +89,10 @@ namespace LandscapeGenerator
         private void globalTimer_Tick(object sender, EventArgs e)
         {
             map.MapUpdater.updateNextTick();
-            ColorMap();
-            updatePrevTypes();
+            map.colorMap(graphics);
+            landscapeBox.Refresh();
+            map.updatePrevTypes();
 
-        }
-
-        public void updatePrevTypes()
-        {
-            for (int i = 0; i < cellsAmount; i++)
-            {
-                for (int j = 0; j < cellsAmount; j++)
-                {
-                    map.Field[i, j].PrevType = map.Field[i, j].Type;
-                }
-            }
-        }
-
-        public void changeText(string text)
-        {
-            consoleBox.Text += text;
         }
 
         private void startStopTimer_Click(object sender, EventArgs e)
@@ -141,7 +127,8 @@ namespace LandscapeGenerator
                 // consoleBox.Text += neededIndex.ToString();
             }
             //consoleBox.Text += CellXCoordinate.ToString() + ";" + CellYCoordinate.ToString() + "        ";
-            ColorMap();
+            map.colorMap(graphics);
+            landscapeBox.Refresh();
         }
 
         private void AddGrassButton_Click(object sender, EventArgs e)
