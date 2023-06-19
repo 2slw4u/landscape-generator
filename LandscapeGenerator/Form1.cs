@@ -36,10 +36,6 @@ namespace LandscapeGenerator
             TypesContainer.initialize();
             EventsContainer.initialize();
             map = initialize.InitializeMap();
-
-            InitializeForest();
-            InitializeWater();
-
             map.updatePrevTypes();
             landscapeBox.Image = new Bitmap(width, height);
             graphics = Graphics.FromImage(landscapeBox.Image);
@@ -48,30 +44,6 @@ namespace LandscapeGenerator
             globalTimer.Enabled = true;
             startStopTimer.Enabled = true;
             landscapeBox.Enabled = true;
-        }
-
-        public void InitializeForest()
-        {
-
-        }
-            const double rate = 0.2;
-            Random r = new Random();
-            for (int i = 0; i < cellsAmount; ++i)
-            {
-                for (int j = 0; j < cellsAmount; ++j)
-                {
-                    double roll = r.NextDouble();
-                    if (rate < roll)
-                    {
-                        map.Field[i, j].Type = TypesContainer.TypeDict[AllTypes.FOREST];
-                    }
-                }
-            }
-        }
-
-        public void InitializeWater()
-        {
-
         }
 
         private void resolutionContainer_ValueChanged(object sender, EventArgs e)
