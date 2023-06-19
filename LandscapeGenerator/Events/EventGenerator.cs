@@ -10,18 +10,17 @@ namespace LandscapeGenerator.Events
     {
         public double EventChance { get; private set; }
 
-        public Event GenerateEvent(int sizeMap)
+
+        public Event GenerateEvent(int sizeMap, int xCoordinate, int yCoordinate, int index, double randomChance)
         {
             
             Random random = new Random();
-            int eventsType = random.Next(0, EventsContainer.EventsDict.Count);
-            if (random.NextDouble() > EventChance)
+            if (randomChance > EventChance)
             {
-                Event newEvent = EventFactory.getEvent(EventsContainer.EventsDict.ElementAt(eventsType).Key);
+                Event newEvent = EventFactory.getEvent(EventsContainer.EventsDict.ElementAt(index).Key);
                 newEvent.size = random.Next(5,15);
-                //newEvent.duration = random.Next();
-                newEvent.positionX = random.Next(0, sizeMap);
-                newEvent.positionY = random.Next(0, sizeMap);
+                newEvent.positionX = xCoordinate;
+                newEvent.positionY = yCoordinate;
                 return newEvent;
             }
             else return null;

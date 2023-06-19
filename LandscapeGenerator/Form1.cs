@@ -1,20 +1,24 @@
 using LandscapeGenerator.CellTypes;
 using LandscapeGenerator.Events;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace LandscapeGenerator
 {
+
     public partial class Form1 : Form
     {
         private Graphics graphics;
         private int width = 800;
         private int height = 800;
         public int resolution = 1;
-        private int cellsAmount = 1;
+        public int cellsAmount = 1;
         private string addedObject = "Stone";
         private string typeOfAddedObject = "Cell";
         private LandscapeMap map;
+        private Initialize.Initialize initialize;
+
         public Form1()
         {
             InitializeComponent();
@@ -24,6 +28,7 @@ namespace LandscapeGenerator
             landscapeBox.Height = height;
             landscapeBox.Image = new Bitmap(width, height);
             graphics = Graphics.FromImage(landscapeBox.Image);
+            initialize = new Initialize.Initialize(this);
         }
 
         private void ColorMap()
@@ -39,24 +44,8 @@ namespace LandscapeGenerator
             }
             landscapeBox.Refresh();
         }
-        private void InitializeMap()
-        {
-            map = new LandscapeMap(cellsAmount, cellsAmount, this);
-            for (int i = 0; i < cellsAmount; ++i)
-            {
-                for (int j = 0; j < cellsAmount; ++j)
-                {
-                    map.Field[i, j] = new Cell(i * resolution, j * resolution);
-                }
-            }
-            MapGenerator generator = new DiamondSquareGenerator();
-            map.Field = generator.generateHeightMap(map.Field);
-            InitializeForest();
-            InitializeWater();
-            updatePrevTypes();
-        }
-
-        private void InitializeForest()
+      
+        public void InitializeForest()
         {
             const double rate = 0.2;
             Random r = new Random();
@@ -74,7 +63,7 @@ namespace LandscapeGenerator
             }
         }
 
-        private void InitializeWater()
+        public void InitializeWater()
         {
             const int sourceAmmount = 2;
             Random r = new Random();
@@ -99,7 +88,11 @@ namespace LandscapeGenerator
         {
             TypesContainer.initialize();
             EventsContainer.initialize();
-            InitializeMap();
+            map = initialize.InitializeMap();
+
+            InitializeForest();
+            InitializeWater();
+            updatePrevTypes();
             landscapeBox.Image = new Bitmap(width, height);
             graphics = Graphics.FromImage(landscapeBox.Image);
             ColorMap();
@@ -128,7 +121,7 @@ namespace LandscapeGenerator
 
         }
 
-        private void updatePrevTypes()
+        public void updatePrevTypes()
         {
             for (int i = 0; i < cellsAmount; i++)
             {
@@ -169,9 +162,13 @@ namespace LandscapeGenerator
             }
             else if (typeOfAddedObject == "Event")
             {
-
+                Event newEvent = EventsContainer.EventsDict[Enum.Parse<AllEvents>(addedObject, true)];
+                int neededIndex = EventsContainer.EventsDict.Values.ToList().IndexOf(newEvent);
+                newEvent = map.MapUpdater.EventGenerator.GenerateEvent(map.Height, CellXCoordinate, CellYCoordinate, neededIndex, 1);
+                newEvent.happen(map.Field);
+                // consoleBox.Text += neededIndex.ToString();
             }
-            consoleBox.Text += CellXCoordinate.ToString() + ";" + CellYCoordinate.ToString() + "        ";
+            //consoleBox.Text += CellXCoordinate.ToString() + ";" + CellYCoordinate.ToString() + "        ";
             ColorMap();
         }
 
@@ -209,6 +206,24 @@ namespace LandscapeGenerator
         {
             typeOfAddedObject = "Cell";
             addedObject = "Stone";
+        }
+
+        private void ApplyDraughtButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Event";
+            addedObject = "Draught";
+        }
+
+        private void ApplyEarthquakeButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Event";
+            addedObject = "Earthquake";
+        }
+
+        private void ApplyVolcanoButton_Click(object sender, EventArgs e)
+        {
+            typeOfAddedObject = "Event";
+            addedObject = "Volcano";
         }
     }
 }

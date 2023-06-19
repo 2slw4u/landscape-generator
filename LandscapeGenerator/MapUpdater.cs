@@ -13,7 +13,7 @@ namespace LandscapeGenerator
     {
         private LandscapeMap Map;
 
-        private EventGenerator EventGenerator;
+        public EventGenerator EventGenerator;
 
         public void updateNextTick()
         {
@@ -37,7 +37,9 @@ namespace LandscapeGenerator
 
                 }
             }
-            Event newEvent = EventGenerator.GenerateEvent(Map.Height);
+
+            Random random = new Random();
+            Event newEvent = EventGenerator.GenerateEvent(Map.Height, random.Next(0, Map.Height), random.Next(0, Map.Height), random.Next(0, EventsContainer.EventsDict.Count), random.NextDouble());
             if (newEvent != null)
             {
                 newEvent.happen(Map.Field);
