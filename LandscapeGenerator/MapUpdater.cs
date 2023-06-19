@@ -1,4 +1,5 @@
 ﻿using LandscapeGenerator.CellTypes;
+using LandscapeGenerator.Events;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,8 @@ namespace LandscapeGenerator
     internal class MapUpdater
     {
         private LandscapeMap Map;
+
+        private EventGenerator EventGenerator;
 
         public void updateNextTick()
         {
@@ -31,12 +34,17 @@ namespace LandscapeGenerator
                         }
  
                     }
+
                 }
             }
+            EventGenerator.GenerateEvent(Map.Height);
         }
         public MapUpdater(LandscapeMap Map)
         {
             this.Map = Map;
+            this.EventGenerator = new EventGenerator(0);
         }
+
+        
     }
 }

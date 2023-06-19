@@ -1,4 +1,5 @@
 using LandscapeGenerator.CellTypes;
+using LandscapeGenerator.Events;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -96,6 +97,7 @@ namespace LandscapeGenerator
         private void button1_Click(object sender, EventArgs e)
         {
             TypesContainer.initialize();
+            EventsContainer.initialize();
             InitializeMap();
             landscapeBox.Image = new Bitmap(width, height);
             graphics = Graphics.FromImage(landscapeBox.Image);
@@ -121,6 +123,7 @@ namespace LandscapeGenerator
             map.MapUpdater.updateNextTick();
             ColorMap();
             updatePrevTypes();
+
         }
 
         private void updatePrevTypes()
@@ -151,6 +154,11 @@ namespace LandscapeGenerator
                 startStopTimer.Text = "Стоп";
                 globalTimer.Enabled = true;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
