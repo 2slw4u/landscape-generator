@@ -9,6 +9,8 @@ namespace LandscapeGenerator.CellTypes
     internal abstract class Type
     {
         public abstract bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours);
-        public abstract void update(Type newType);
+
+        public abstract Color getColor(int height);
+        public abstract void Initialize(Cell[,] Field);
     }
 }

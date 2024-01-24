@@ -8,22 +8,71 @@ namespace LandscapeGenerator.CellTypes
 {
     internal class Forest : Type
     {
+        private static readonly Dictionary<int, Color> colors = new Dictionary<int, Color>()
+        {
+           {10, Color.FromArgb(84, 134, 54)},
+            {9, Color.FromArgb(77, 123, 49)},
+            {8, Color.FromArgb(67, 107, 43)},
+            {7, Color.FromArgb(60, 96, 38)},
+            {6, Color.FromArgb(57, 90, 36)},
+            {5, Color.FromArgb(50, 80, 32)},
+            {4, Color.FromArgb(43, 69, 27)},
+            {3, Color.FromArgb(41, 66, 26)},
+            {2, Color.FromArgb(31, 52, 20)},
+            {1, Color.FromArgb(27, 45, 17)},
+            {0, Color.FromArgb(24, 43, 15)}
+
+        };
+        public override Color getColor(int height)
+        {
+            return colors[height];
+        }
         public override bool determineIfSuitable(Cell affectedCell, List<Cell> neighbours)
         {
-            //сделать нормальный Game of Life
-            Random random = new Random();
-            for (int i = 0; i < neighbours.Count; i++)
+            int forestCount = 0;
+            if (affectedCell.Height >= 9)
             {
-                if (neighbours[i].type is Forest && random.Next(0, 10) >= 5)
+                return false;
+            }
+            if (affectedCell.Type is Sand)
+            {
+                return false;
+            }
+            foreach(Cell neighbor in neighbours)
+            {
+                if(neighbor.PrevType is Forest && (Math.Abs(affectedCell.Height - neighbor.Height) < 5))
                 {
-                    return true;
+                    forestCount++;
                 }
             }
+            if ((forestCount == 1 || forestCount == 2 || forestCount == 3) && affectedCell.PrevType is Forest)
+            {
+                return true;
+            }
+            if (forestCount == 3)
+            {
+                return true;
+            }
+
             return false;
         }
-        public override void update(Type newType)
+        public override void Initialize(Cell[,] Field)
         {
-            
+            const double rate = 0.2;
+            Random r = new Random();
+            int size = Field.GetLength(0);
+            for (int i = 0; i < size; ++i)
+            {
+                for (int j = 0; j < size; ++j)
+                {
+
+                    double roll = r.NextDouble();
+                    if (rate < roll)
+                    {
+                        Field[i, j].Type = TypesContainer.TypeDict[AllTypes.FOREST];
+                    }
+                }
+            }
         }
     }
 }
